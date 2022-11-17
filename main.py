@@ -29,7 +29,7 @@ df_total = pd.DataFrame()
 r_list = r.sample(range(100), 100)  
 
 for i in r_list:
-    s0 = pd.read_csv(path / 'submission_files' / subs[i], index_col='id')
+    s0 = pd.read_csv(path / 'submission_files' / subs[i], index_col= 'id')
     df_total = pd.concat([df_total, s0], axis = 1)
     
 
@@ -37,3 +37,16 @@ df = df_total.sum(axis = 1)
 df = df/100
 
 score = log_loss(labels, df[:20000])
+
+Logger.current_logger().report_scalar(title='first_test', series='log_loss', value=round(scores[1] * 100, 4), iteration=1)
+
+df = df[20000:]
+
+df = pd.DataFrame(df)
+df.columns = ['pred']
+
+df.to_csv('submissions.csv')
+
+!kaggle competitions submit -c tabular-playground-series-nov-2022 -f submissions.csv -m "Submit"
+
+
