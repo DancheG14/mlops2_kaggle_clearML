@@ -18,9 +18,7 @@ jobs:
     
     steps:
     
-    - uses: actions/checkout@v2
-    - uses: psf/black@stable
-      
+    
     - uses: actions/checkout@v2
     - uses: psf/black@stable
     
