@@ -1,14 +1,14 @@
 1.
  1.1 Установить clearml на локальную(или виртуальную машину) pip install clearml
  1.2 Инициализировать clearml введя команду clearml-init , перейти в рабочее пространство команды ( "Amangeldi Kraubayev's workspace") 
-  на web-сайте clearml https://app.clear.ml/settings/workspace-configuration
-  
+  на web-сайте clearml https://app.clear.ml/settings/workspace-configuration , после этого перейдем во вкладке «Профиль» в «Settings» (настройки) ,после чего во вкладке «Workspace» выберем «Create new credentials» Иив открывшемся окне скопируем данные, которые нужно будет записать в консоль рабочей машины после вызова clearml-init.
+
 2.
 Добавить в python-скрипт эксперимента(код, запускаемый локально или на облачном сервере) строки:
  from clearml import Task, Logger
  task = Task.init(project_name="mlops2", task_name="%ваше имя%") , а также строку после получения результата предсказания модели о подсчёта метрик(и)
   для трансляции метрик, определяемых в аргументе "series=" в ClearML:
- Logger.current_logger().report_scalar(title='first_test', series='Log_loss', value=round(scores[1] * 100, 4), iteration=1)
+ Logger.current_logger().report_scalar(title='first_test', series='log_loss', value=round(score, 4), iteration=1)
  
 3.
 Установить kaggle -  pip install kaggle
