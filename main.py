@@ -3,12 +3,13 @@ import pandas as pd
 from pathlib import Path
 
 from sklearn.metrics import log_loss
-
+from clearml import Task, Logger
 import random as r
 import numpy as np
 
 
 path = Path('/Users/macbook/UrFU/3 семестр/Автоматизаци mlops/tabular-playground-series-nov-2022 2/')
+task = Task.init(project_name="mlops2", task_name="Daniil")
 
 
 
@@ -38,7 +39,7 @@ df = df/100
 
 score = log_loss(labels, df[:20000])
 
-Logger.current_logger().report_scalar(title='first_test', series='log_loss', value=round(scores[1] * 100, 4), iteration=1)
+Logger.current_logger().report_scalar(title='first_test', series='log_loss', value=round(score, 4), iteration=1)
 
 df = df[20000:]
 
@@ -47,6 +48,6 @@ df.columns = ['pred']
 
 df.to_csv('submissions.csv')
 
-!kaggle competitions submit -c tabular-playground-series-nov-2022 -f submissions.csv -m "Submit"
+#!kaggle competitions submit -c tabular-playground-series-nov-2022 -f submissions.csv -m "Submit"
 
 
