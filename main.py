@@ -8,7 +8,7 @@ import random as r
 import numpy as np
 
 
-path = Path('/Users/macbook/UrFU/3 семестр/Автоматизаци mlops/tabular-playground-series-nov-2022 2/')
+path = Path('./tabular-playground-series-nov-2022/')
 task = Task.init(project_name="mlops2", task_name="Daniil")
 
 
@@ -26,8 +26,8 @@ gt_ids = labels.index
 subs = sorted(os.listdir(path/'submission_files'))
 
 df_total = pd.DataFrame()
-#Выбираем сто случайных чисел
-r_list = r.sample(range(100), 100)  
+#Выбираем косарь случайных чисел
+r_list = r.sample(range(1000), 1000))  
 
 for i in r_list:
     s0 = pd.read_csv(path / 'submission_files' / subs[i], index_col= 'id')
@@ -48,6 +48,6 @@ df.columns = ['pred']
 
 df.to_csv('submissions.csv')
 
-#!kaggle competitions submit -c tabular-playground-series-nov-2022 -f submissions.csv -m "Submit"
+!kaggle competitions submit -c tabular-playground-series-nov-2022 -f submissions.csv -m "Submit"
 
 
