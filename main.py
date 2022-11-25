@@ -43,6 +43,7 @@ df = df/1000
 score = log_loss(labels, df[:20000])
 
 Logger.current_logger().report_scalar(title='first_test', series='log_loss', value=round(score, 4), iteration=1)
+task.close()
 
 df = df[20000:]
 
