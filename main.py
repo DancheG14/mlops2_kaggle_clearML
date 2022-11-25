@@ -1,13 +1,16 @@
 import os
 import pandas as pd
 from pathlib import Path
-
+import kaggle
 from sklearn.metrics import log_loss
 from clearml import Task, Logger
 import random as r
 import numpy as np
 
 
+
+kaggle competitions download -c tabular-playground-series-nov-2022
+unzip tabular-playground-series-nov-2022.zip
 path = Path('./tabular-playground-series-nov-2022/')
 task = Task.init(project_name="mlops2", task_name="Daniil")
 
@@ -27,7 +30,7 @@ subs = sorted(os.listdir(path/'submission_files'))
 
 df_total = pd.DataFrame()
 #Выбираем косарь случайных чисел
-r_list = r.sample(range(1000), 1000))  
+r_list = r.sample(range(5000), 1000))  
 
 for i in r_list:
     s0 = pd.read_csv(path / 'submission_files' / subs[i], index_col= 'id')
@@ -35,7 +38,7 @@ for i in r_list:
     
 
 df = df_total.sum(axis = 1)
-df = df/100
+df = df/1000
 
 score = log_loss(labels, df[:20000])
 
@@ -48,6 +51,6 @@ df.columns = ['pred']
 
 df.to_csv('submissions.csv')
 
-!kaggle competitions submit -c tabular-playground-series-nov-2022 -f submissions.csv -m "Submit"
+kaggle competitions submit -c tabular-playground-series-nov-2022 -f submissions.csv -m "Submit"
 
 
