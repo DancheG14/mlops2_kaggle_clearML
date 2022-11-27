@@ -30,7 +30,9 @@ subs = sorted(os.listdir(path/'submission_files'))
 
 df_total = pd.DataFrame()
 #Выбираем косарь случайных чисел
-r_list = r.sample(range(5000), 1000))  
+n = 1000
+r_list = r.sample(range(5000), n))
+
 
 for i in r_list:
     s0 = pd.read_csv(path / 'submission_files' / subs[i], index_col= 'id')
@@ -38,7 +40,7 @@ for i in r_list:
     
 
 df = df_total.sum(axis = 1)
-df = df/1000
+df = df/n
 
 score = log_loss(labels, df[:20000])
 
@@ -52,6 +54,6 @@ df.columns = ['pred']
 
 df.to_csv('submissions.csv')
 
-kaggle competitions submit -c tabular-playground-series-nov-2022 -f submissions.csv -m "Submit"
+#kaggle competitions submit -c tabular-playground-series-nov-2022 -f submissions.csv -m "Submit"
 
 
