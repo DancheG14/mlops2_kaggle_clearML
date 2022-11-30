@@ -29,7 +29,7 @@ gt_ids = labels.index
 subs = sorted(os.listdir(path/'submission_files'))
 
 df_total = pd.DataFrame()
-#Выбираем косарь случайных чисел
+#Выбираем тысячу случайных предсказаний из всех
 n = 1000
 r_list = r.sample(range(5000), n))
 
